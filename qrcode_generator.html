@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QR Code Generator</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: linear-gradient(135deg, #ff4081, #81d4fa);
+        margin: 0;
+        color: #ffffff;
+      }
+
+      .container {
+        text-align: center;
+        background-color: rgba(0, 0, 0, 0.8);
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        width: 90%;
+        max-width: 500px;
+      }
+
+      h1 {
+        font-size: 2em;
+        margin-bottom: 20px;
+        color: #ffffff;
+      }
+
+      input[type="text"] {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        font-size: 16px;
+        box-sizing: border-box;
+        transition: border-color 0.3s;
+      }
+
+      input[type="text"]:focus {
+        border-color: #ff4081;
+        outline: none;
+      }
+
+      button {
+        padding: 12px 24px;
+        border: none;
+        border-radius: 8px;
+        background-color: #ffffff;
+        color: #000000;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      button:hover {
+        background-color: #000000;
+        color: #ffffff;
+      }
+
+      .qrcode {
+        margin-top: 20px;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>QR Code Generator</h1>
+      <input
+        type="text"
+        id="text-input"
+        placeholder="Enter text to generate QR code"
+      />
+      <button onclick="generateQRCode()">Generate QR Code</button>
+      <div id="qrcode" class="qrcode"></div>
+    </div>
+
+    <!-- QR Code library -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+    <script>
+      function generateQRCode() {
+        const text = document.getElementById("text-input").value;
+        const qrcodeContainer = document.getElementById("qrcode");
+        qrcodeContainer.innerHTML = ""; // Clear previous QR Code
+
+        if (text) {
+          QRCode.toDataURL(text, { width: 200 }, function (error, url) {
+            if (error) {
+              console.error(error);
+              alert("Error generating QR Code. Check the console for details.");
+            } else {
+              const img = document.createElement("img");
+              img.src = url;
+              qrcodeContainer.appendChild(img);
+            }
+          });
+        } else {
+          alert("Please enter some text!");
+        }
+      }
+    </script>
+  </body>
+</html>
