@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Generate QR codes for free with our fast and easy QR code generator. Create QR codes for URLs, text, or contact details and download them instantly.">
+  <meta name="keywords" content="qrcode generate free, free QR code generator, create QR code online, QR code maker, generate QR code, QR code creator, free QR code tool">
+  <meta name="author" content="Abdurrohman Al Fathi">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://thi-web6.github.io/QRcode-generator/">
+  <meta property="og:title" content="Free QR Code Generator - Create & Download QR Codes">
+  <meta property="og:description" content="Create QR codes for URLs, text, or contact details with our free QR code generator. Download your QR code instantly!">
+  <meta property="og:image" content="https://thi-web6.github.io/QRcode-generator/logo.png">
+  <meta property="og:url" content="https://thi-web6.github.io/QRcode-generator/">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Free QR Code Generator - Create & Download QR Codes">
+  <meta name="twitter:description" content="Create QR codes for URLs, text, or contact details with our free QR code generator. Download your QR code instantly!">
+  <meta name="twitter:image" content="https://thi-web6.github.io/QRcode-generator/logo.png">
+  <title>Free QR Code Generator - Create & Download QR Codes</title>
+  <style>
+    :root {
+      --primary-color: #ff6200; /* SAR-inspired orange */
+      --secondary-color: #ff8c00; /* Lighter orange shade */
+      --text-color: #ffffff;
+      --bg-dark: rgba(0, 0, 0, 0.8);
+      --button-bg: #ffffff;
+      --button-text: #000000;
+      --button-hover-bg: #000000;
+      --button-hover-text: #ffffff;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      margin: 0;
+      color: var(--text-color);
+      touch-action: manipulation; /* Improves touch responsiveness */
+    }
+
+    .container {
+      text-align: center;
+      background-color: var(--bg-dark);
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      width: 90%;
+      max-width: 500px;
+      margin: 1rem;
+    }
+
+    .logo {
+      max-width: 150px;
+      height: auto;
+      margin-bottom: 1.5rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    p {
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+    }
+
+    .input-group {
+      margin-bottom: 1.5rem;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 0.75rem;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      font-size: 1rem;
+      box-sizing: border-box;
+      transition: border-color 0.3s;
+    }
+
+    input[type="text"]:focus {
+      border-color: var(--primary-color);
+      outline: none;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+
+    button {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      background-color: var(--button-bg);
+      color: var(--button-text);
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s;
+      touch-action: manipulation; /* Ensures touch events are handled properly */
+    }
+
+    button:hover {
+      background-color: var(--button-hover-bg);
+      color: var(--button-hover-text);
+    }
+
+    button:focus {
+      outline: 2px solid var(--primary-color);
+      outline-offset: 2px;
+    }
+
+    .qrcode {
+      margin-top: 1.5rem;
+    }
+
+    img.qr-image {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    .error {
+      color: #ff6b6b;
+      margin-top: 1rem;
+      display: none;
+    }
+
+    footer {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    footer a {
+      color: var(--text-color);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    footer a:hover {
+      color: var(--primary-color);
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <img src="logo.png" alt="QR Code Generator Logo" class="logo">
+    <h1>Free QR Code Generator</h1>
+    <p>Create QR codes for free with our easy-to-use tool. Generate QR codes for URLs, text, or contact details and download them instantly.</p>
+    <section class="input-group" aria-labelledby="qr-input-label">
+      <label id="qr-input-label" for="text-input" class="visually-hidden">Enter text to generate QR code</label>
+      <input
+        type="text"
+        id="text-input"
+        placeholder="Enter text or URL to generate QR code"
+        aria-describedby="error-message"
+      >
+    </section>
+    <div class="button-group">
+      <button type="button" id="generate-btn">Generate QR Code</button>
+      <button type="button" id="download-btn" disabled>Download QR Code</button>
+    </div>
+    <div id="qrcode" class="qrcode" aria-live="polite"></div>
+    <p id="error-message" class="error" role="alert">Please enter some text to generate a QR code.</p>
+    <footer>
+      Created by <a href="https://thi-web6.github.io/QRcode-generator/"> fathi </a>
+    </footer>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Free QR Code Generator",
+      "description": "A free tool to generate QR codes for URLs, text, or contact details. Download your QR code instantly.",
+      "url": "https://thi-web6.github.io/QRcode-generator/",
+      "creator": {
+        "@type": "Person",
+        "name": "Abdurrohman Al Fathi"
+      },
+      "image": "https://thi-web6.github.io/QRcode-generator/logo.png",
+      "applicationCategory": "Utility"
+    }
+  </script>
+  <script>
+    (function () {
+      // Check if QRCode library is loaded
+      if (typeof QRCode === 'undefined') {
+        console.error('QRCode library not loaded. Please check CDN or include qrcode.min.js locally.');
+        document.getElementById('error-message').textContent = 'QR code library failed to load. Please try again later.';
+        document.getElementById('error-message').style.display = 'block';
+        return;
+      }
+
+      const textInput = document.getElementById("text-input");
+      const qrcodeContainer = document.getElementById("qrcode");
+      const generateBtn = document.getElementById("generate-btn");
+      const downloadBtn = document.getElementById("download-btn");
+      const errorMessage = document.getElementById("error-message");
+      let qrCodeUrl = null;
+
+      function showError(message) {
+        console.warn('Error displayed:', message);
+        errorMessage.textContent = message;
+        errorMessage.style.display = "block";
+        setTimeout(() => {
+          errorMessage.style.display = "none";
+        }, 3000);
+      }
+
+      function generateQRCode() {
+        console.log('Generate QR Code button clicked or Enter pressed');
+        const text = textInput.value.trim();
+        qrcodeContainer.innerHTML = ""; // Clear previous QR Code
+        downloadBtn.disabled = true;
+
+        if (!text) {
+          showError("Please enter some text to generate a QR code.");
+          return;
+        }
+
+        try {
+          QRCode.toDataURL(text, { width: 200, errorCorrectionLevel: 'H' }, (error, url) => {
+            if (error) {
+              console.error("QR Code generation error:", error);
+              showError("Error generating QR code. Please try again.");
+              return;
+            }
+
+            qrCodeUrl = url;
+            const img = document.createElement("img");
+            img.src = url;
+            img.alt = "Generated QR code for: " + text;
+            img.className = "qr-image";
+            qrcodeContainer.appendChild(img);
+            downloadBtn.disabled = false;
+            console.log('QR Code generated successfully');
+          });
+        } catch (e) {
+          console.error("QR Code generation failed:", e);
+          showError("Failed to generate QR code. Please try again.");
+        }
+      }
+
+      function downloadQRCode() {
+        if (!qrCodeUrl) {
+          showError("No QR code available to download.");
+          return;
+        }
+
+        const link = document.createElement("a");
+        link.href = qrCodeUrl;
+        link.download = "qrcode.png";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        console.log('QR Code downloaded');
+      }
+
+      // Event listeners for button
+      generateBtn.addEventListener("click", () => {
+        console.log('Click event triggered on Generate button');
+        generateQRCode();
+      });
+      generateBtn.addEventListener("touchstart", (e) => {
+        e.preventDefault(); // Prevent default touch behavior
+        console.log('Touchstart event triggered on Generate button');
+        generateQRCode();
+      });
+      downloadBtn.addEventListener("click", downloadQRCode);
+      downloadBtn.addEventListener("touchstart", (e) => {
+        e.preventDefault();
+        console.log('Touchstart event triggered on Download button');
+        downloadQRCode();
+      });
+      textInput.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") {
+          console.log('Enter key pressed');
+          generateQRCode();
+        }
+      });
+    })();
+  </script>
+</body>
+  </html>
